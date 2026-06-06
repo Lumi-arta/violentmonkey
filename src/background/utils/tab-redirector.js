@@ -1,9 +1,10 @@
 import { browserWindows, request, noop, i18n, getUniqId, getTab } from '@/common';
 import { FILE_GLOB_ALL } from '@/common/consts';
 import cache from './cache';
+import { removeScripts } from './db';
 import { addPublicCommands, commands } from './init';
 import { getOption } from './options';
-import { parseMeta, matchUserScript } from './script';
+import { aliveScripts, parseMeta, matchUserScript } from './script';
 import { fileSchemeRequestable, getTabUrl, NEWTAB_URL_RE, tabsOnUpdated } from './tabs';
 import { FIREFOX } from './ua';
 
@@ -30,6 +31,26 @@ addPublicCommands({
       from: src.url || src.tab?.url,
       parsed: true,
     }, src);
+  },
+  /**
+   * OKScript 平台专属卸载命令
+   * 根据 scriptUrl（即 @downloadURL 或 lastInstallURL）查找并删除脚本
+   * @param {{ scriptUrl: string }} data - 脚本 URL
+   */
+  async OKScriptUninstall({ scriptUrl }) {
+    const script = aliveScripts.find(s =>
+      s.custom.lastInstallURL === scriptUrl
+      || s.meta.downloadURL === scriptUrl
+    );
+    if (!script) {
+      throw 'Script not found';
+    }
+    const id = script.props.id;
+    // 标记为已删除
+    await commands.MarkRemoved({ id, removed: 1 });
+    // 永久删除
+    await removeScripts([id]);
+    return { removed: true };
   },
 });
 

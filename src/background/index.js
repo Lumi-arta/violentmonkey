@@ -82,6 +82,12 @@ browser.runtime.onMessageExternal?.addListener((message, sender, sendResponse) =
       .catch(err => sendResponse({ success: false, error: `${err}` }));
     return true; // keep the message channel open for async response
   }
+  if (message?.cmd === 'OKScriptUninstall' && message?.data?.scriptUrl) {
+    commands.OKScriptUninstall(message.data)
+      .then(() => sendResponse({ success: true }))
+      .catch(err => sendResponse({ success: false, error: `${err}` }));
+    return true;
+  }
   if (message?.cmd === 'OKScriptPing') {
     sendResponse({ success: true, version: browser.runtime.getManifest().version });
     return;
