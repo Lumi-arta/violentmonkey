@@ -1,0 +1,241 @@
+/* OkScript 自定义安装确认页样式 */
+
+/* 整体页面背景 */
+.page-confirm {
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4ecf7 100%) !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .page-confirm {
+    background: linear-gradient(135deg, #1a1d23 0%, #2d3748 100%) !important;
+  }
+}
+
+/* 顶部信息卡片 */
+.page-confirm > .frame-block:first-of-type {
+  background: #ffffff !important;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08) !important;
+  margin: 16px !important;
+  padding: 24px !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .page-confirm > .frame-block:first-of-type {
+    background: #2d3748 !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3) !important;
+  }
+}
+
+/* 脚本图标放大 */
+.page-confirm .image img {
+  border-radius: 12px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* 标题美化 */
+.page-confirm h1 {
+  font-size: 1.4rem !important;
+  font-weight: 700 !important;
+  color: #1a202c !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .page-confirm h1 {
+    color: #f7fafc !important;
+  }
+}
+
+/* 描述文字 */
+.page-confirm .info .descr {
+  color: #4a5568 !important;
+  line-height: 1.6 !important;
+  font-size: 0.9rem !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .page-confirm .info .descr {
+    color: #a0aec0 !important;
+  }
+}
+
+/* 安装按钮 - 主按钮样式 */
+.page-confirm button#confirm {
+  background: linear-gradient(135deg, #48bb78 0%, #38a169 100%) !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 10px !important;
+  padding: 10px 24px !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  box-shadow: 0 2px 8px rgba(72, 187, 120, 0.3) !important;
+}
+
+.page-confirm button#confirm:hover:not(:disabled) {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 16px rgba(72, 187, 120, 0.4) !important;
+  background: linear-gradient(135deg, #38a169 0%, #2f855a 100%) !important;
+}
+
+.page-confirm button#confirm:disabled {
+  background: #cbd5e0 !important;
+  color: #a0aec0 !important;
+  box-shadow: none !important;
+  cursor: not-allowed !important;
+}
+
+/* 重新安装时的主按钮 */
+.page-confirm.reinstall button#confirm {
+  background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%) !important;
+  box-shadow: 0 2px 8px rgba(66, 153, 225, 0.3) !important;
+}
+
+.page-confirm.reinstall button#confirm:hover:not(:disabled) {
+  box-shadow: 0 4px 16px rgba(66, 153, 225, 0.4) !important;
+  background: linear-gradient(135deg, #3182ce 0%, #2b6cb0 100%) !important;
+}
+
+/* 关闭/编辑等次要按钮 */
+.page-confirm button[id*="+"] {
+  background: #edf2f7 !important;
+  color: #4a5568 !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+  padding: 8px 16px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  transition: all 0.2s ease !important;
+}
+
+.page-confirm button[id*="+"]:hover:not(:disabled) {
+  background: #e2e8f0 !important;
+  border-color: #cbd5e0 !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .page-confirm button[id*="+"] {
+    background: #4a5568 !important;
+    color: #e2e8f0 !important;
+    border-color: #718096 !important;
+  }
+  .page-confirm button[id*="+"]:hover:not(:disabled) {
+    background: #718096 !important;
+  }
+}
+
+/* 最后的关闭按钮（无 id） */
+.page-confirm .actions > button:not([id]) {
+  background: transparent !important;
+  color: #a0aec0 !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+  padding: 8px 16px !important;
+  font-size: 13px !important;
+  transition: all 0.2s ease !important;
+}
+
+.page-confirm .actions > button:not([id]):hover {
+  color: #e53e3e !important;
+  border-color: #fed7d7 !important;
+  background: #fff5f5 !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .page-confirm .actions > button:not([id]) {
+    border-color: #4a5568 !important;
+    color: #718096 !important;
+  }
+  .page-confirm .actions > button:not([id]):hover {
+    color: #fc8181 !important;
+    border-color: #742a2a !important;
+    background: rgba(245, 101, 101, 0.1) !important;
+  }
+}
+
+/* 设置复选框样式 */
+.page-confirm .btn-ghost {
+  border-radius: 6px !important;
+  padding: 4px 8px !important;
+}
+
+/* 代码预览区域 */
+.page-confirm > .frame-block.flex-1 {
+  margin: 0 16px 16px !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .page-confirm > .frame-block.flex-1 {
+    border-color: rgba(255, 255, 255, 0.08) !important;
+  }
+}
+
+/* @match 等列表标签 */
+.page-confirm .lists dt {
+  color: #2d3748 !important;
+  font-size: 0.8rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+}
+
+.page-confirm .lists dd {
+  background: #f7fafc !important;
+  border-radius: 6px !important;
+  padding: 4px 8px !important;
+  font-size: 0.85rem !important;
+  border: 1px solid #edf2f7 !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .page-confirm .lists dt {
+    color: #e2e8f0 !important;
+  }
+  .page-confirm .lists dd {
+    background: #1a202c !important;
+    border-color: #4a5568 !important;
+    color: #a0aec0 !important;
+  }
+}
+
+/* 状态消息 */
+.page-confirm .actions .status {
+  border-left: 4px solid #48bb78 !important;
+  background: #f0fff4 !important;
+  border-radius: 0 8px 8px 0 !important;
+  padding: 6px 12px !important;
+  color: #276749 !important;
+  font-size: 0.85rem !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .page-confirm .actions .status {
+    background: rgba(72, 187, 120, 0.1) !important;
+    color: #68d391 !important;
+  }
+}
+
+/* 警告信息 */
+.page-confirm .warning {
+  background: #fff5f5 !important;
+  border: 1px solid #fed7d7 !important;
+  border-radius: 8px !important;
+  padding: 8px 12px !important;
+  color: #c53030 !important;
+  font-size: 0.85rem !important;
+  margin-top: 8px !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .page-confirm .warning {
+    background: rgba(245, 101, 101, 0.1) !important;
+    border-color: rgba(245, 101, 101, 0.3) !important;
+    color: #fc8181 !important;
+  }
+}

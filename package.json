@@ -107,6 +107,8 @@
   "dependencies": {
     "@violentmonkey/shortcut": "^1.4.4",
     "codemirror": "^5.65.20",
+    "deepmerge": "^4.3.1",
+    "escape-string-regexp": "^5.0.0",
     "fflate": "^0.8.3",
     "tldts": "^7.4.0",
     "vue": "^3.5.35",
