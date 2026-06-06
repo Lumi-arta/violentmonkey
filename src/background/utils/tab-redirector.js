@@ -15,12 +15,12 @@ addPublicCommands({
   },
   ConfirmInstall: confirmInstall,
   /**
-   * OKScript 平台专属安装命令
-   * 通过 window.external.OKScript.install(url) 调用，绕过其他脚本管理器拦截
+   * CodeFox 平台专属安装命令
+   * 通过 chrome.runtime.sendMessage 调用，绕过其他脚本管理器拦截
    * @param {{ scriptUrl: string }} data - 脚本源码 URL
    * @param {VMMessageSender} src
    */
-  async OKScriptInstall({ scriptUrl }, src) {
+  async CodeFoxInstall({ scriptUrl }, src) {
     const { data: code } = await request(scriptUrl);
     if (!code || !matchUserScript(code)) {
       throw `${i18n('msgInvalidScript')}`;
@@ -33,11 +33,11 @@ addPublicCommands({
     }, src);
   },
   /**
-   * OKScript 平台专属卸载命令
+   * CodeFox 平台专属卸载命令
    * 根据 scriptUrl（即 @downloadURL 或 lastInstallURL）查找并删除脚本
    * @param {{ scriptUrl: string }} data - 脚本 URL
    */
-  async OKScriptUninstall({ scriptUrl }) {
+  async CodeFoxUninstall({ scriptUrl }) {
     const script = aliveScripts.find(s =>
       s.custom.lastInstallURL === scriptUrl
       || s.meta.downloadURL === scriptUrl

@@ -73,22 +73,22 @@ browser.commands?.onCommand.addListener(async cmd => {
   handleHotkeyOrMenu(cmd, await getActiveTab());
 });
 
-// OKScript: 监听来自网页的外部消息（通过 externally_connectable）
+// CodeFox: 监听来自网页的外部消息（通过 externally_connectable）
 browser.runtime.onMessageExternal?.addListener((message, sender, sendResponse) => {
-  if (message?.cmd === 'OKScriptInstall' && message?.data?.scriptUrl) {
+  if (message?.cmd === 'CodeFoxInstall' && message?.data?.scriptUrl) {
     const src = { tab: sender.tab, url: sender.url };
-    commands.OKScriptInstall(message.data, src)
+    commands.CodeFoxInstall(message.data, src)
       .then(() => sendResponse({ success: true }))
       .catch(err => sendResponse({ success: false, error: `${err}` }));
     return true; // keep the message channel open for async response
   }
-  if (message?.cmd === 'OKScriptUninstall' && message?.data?.scriptUrl) {
-    commands.OKScriptUninstall(message.data)
+  if (message?.cmd === 'CodeFoxUninstall' && message?.data?.scriptUrl) {
+    commands.CodeFoxUninstall(message.data)
       .then(() => sendResponse({ success: true }))
       .catch(err => sendResponse({ success: false, error: `${err}` }));
     return true;
   }
-  if (message?.cmd === 'OKScriptPing') {
+  if (message?.cmd === 'CodeFoxPing') {
     sendResponse({ success: true, version: browser.runtime.getManifest().version });
     return;
   }
