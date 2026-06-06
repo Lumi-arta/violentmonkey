@@ -13,6 +13,24 @@ addPublicCommands({
     return tab && getTabUrl(tab).startsWith(CONFIRM_URL_BASE);
   },
   ConfirmInstall: confirmInstall,
+  /**
+   * OKScript 平台专属安装命令
+   * 通过 window.external.OKScript.install(url) 调用，绕过其他脚本管理器拦截
+   * @param {{ scriptUrl: string }} data - 脚本源码 URL
+   * @param {VMMessageSender} src
+   */
+  async OKScriptInstall({ scriptUrl }, src) {
+    const { data: code } = await request(scriptUrl);
+    if (!code || !matchUserScript(code)) {
+      throw `${i18n('msgInvalidScript')}`;
+    }
+    return confirmInstall({
+      code,
+      url: scriptUrl,
+      from: src.url || src.tab?.url,
+      parsed: true,
+    }, src);
+  },
 });
 
 async function confirmInstall({ code, from, url, fs, parsed }, { tab = {} }) {

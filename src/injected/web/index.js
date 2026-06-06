@@ -117,8 +117,20 @@ addHandlers({
   Expose(allowGetScriptVer) {
     const key = 'external';
     const obj = window[key];
-    (isObject(obj) ? obj : (window[key] = {}))[VIOLENTMONKEY] = {
+    const target = isObject(obj) ? obj : (window[key] = {});
+    target[VIOLENTMONKEY] = {
       version: process.env.VM_VER,
+      isInstalled: (name, namespace) => (
+        allowGetScriptVer
+          ? bridge.promise('GetScriptVer', { meta: { name, namespace } })
+          : promiseResolve()
+      ),
+    };
+    // OKScript 专属安装接口，供平台网站调用
+    target['OKScript'] = {
+      version: process.env.VM_VER,
+      /** 通过扩展内部安装脚本，绕过其他脚本管理器拦截 */
+      install: (scriptUrl) => bridge.promise('OKScriptInstall', { scriptUrl }),
       isInstalled: (name, namespace) => (
         allowGetScriptVer
           ? bridge.promise('GetScriptVer', { meta: { name, namespace } })

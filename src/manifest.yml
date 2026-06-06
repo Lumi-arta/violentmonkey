@@ -1,6 +1,7 @@
 name: __MSG_extName__
 version: __VERSION__
 manifest_version: 2
+key: "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAszOy/a3MZYLkFtE0552LGXS7/M2O3Brmpoom6imJGON0j5kj6v49R/kwkNMbJrHk9VGQsvBnU4KgkriRx3fLAbaUmLHp1JE1uICNzpJvtoDr1S21ndcsd200GGoHWIYAiCMDNREzr17Rx92/TUeZcMU4bEImziapEmxs0Yi5+Be8XF0+OPnWaF5iy0dtXZIDluNn+ptVRn3e+YYcbrIssxZsKPaB7zNT3zwj77hiROgYAcKFasqVDsKWCBWzpu9Ow0Kg7fH0KknDMuBqL0V6RUhb6XjBjfApn4bNd7GLOrq47BTGvF6tbXyrKsLT981korLJ9yKEy6SWqEG2KTPCYwIDAQAB"
 description: __MSG_extDescription__
 author: Gerald
 homepage_url: 'https://violentmonkey.github.io/'
@@ -59,6 +60,12 @@ commands:
     description: __MSG_updateScriptsAll__
   updateScriptsInTab:
     description: __MSG_updateScriptsInTab__
+
+externally_connectable:
+  matches:
+    - '*://localhost/*'
+    - 'http://localhost:*/*'
+    - 'https://*.okscript.com/*'
 
 minimum_chrome_version: '61.0'
 # 61: URLSearchParams(obj)

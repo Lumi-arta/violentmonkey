@@ -72,3 +72,18 @@ browser.runtime.onMessage.addListener(handleCommandMessage);
 browser.commands?.onCommand.addListener(async cmd => {
   handleHotkeyOrMenu(cmd, await getActiveTab());
 });
+
+// OKScript: 监听来自网页的外部消息（通过 externally_connectable）
+browser.runtime.onMessageExternal?.addListener((message, sender, sendResponse) => {
+  if (message?.cmd === 'OKScriptInstall' && message?.data?.scriptUrl) {
+    const src = { tab: sender.tab, url: sender.url };
+    commands.OKScriptInstall(message.data, src)
+      .then(() => sendResponse({ success: true }))
+      .catch(err => sendResponse({ success: false, error: `${err}` }));
+    return true; // keep the message channel open for async response
+  }
+  if (message?.cmd === 'OKScriptPing') {
+    sendResponse({ success: true, version: browser.runtime.getManifest().version });
+    return;
+  }
+});

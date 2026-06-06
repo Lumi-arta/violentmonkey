@@ -76,6 +76,7 @@ addHandlers({
   CookieList: REIFY,
   CookieSet: REIFY,
   Log: data => safeApply(logging[data[0]], logging, data[1]),
+  OKScriptInstall: true,
   TabFocus: REIFY,
   UpdateValue: REIFY,
 });
